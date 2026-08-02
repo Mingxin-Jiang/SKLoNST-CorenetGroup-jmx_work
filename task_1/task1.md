@@ -18,19 +18,32 @@ sudo ip netns exec A ip route add 198.0.0.0/24 dev veth-a
 sudo ip netns exec B ip route add 187.0.0.0/24 dev veth-b
 ```
 #### 互联后报文解读
-**监听**：
-![1](./Pasted%20image%2020260802190149.png)
-**发起连接**：
-![2](./Pasted%20image%2020260802190312.png)
-右侧分屏则是对网络A进行的抓包，可以看到在网络B连接A时抓到的包表明A和B进行三次握手。
-**关键报文字段分析**：
-1、flag：报文标志，S代表SYN包、S.代表SYN+ACK包，.代表ACK包、
+**监听**：  
+
+![1](./Pasted%20image%2020260802190149.png)  
+
+**发起连接**：  
+
+![2](./Pasted%20image%2020260802190312.png)  
+
+右侧分屏则是对网络A进行的抓包，可以看到在网络B连接A时抓到的包表明A和B进行三次握手。  
+
+**关键报文字段分析**：  
+
+1、flag：报文标志，S代表SYN包、S.代表SYN+ACK包，.代表ACK包、  
+
 ![3](./Pasted%20image%2020260802191027.png)
-当B端发送hello信息时，出现flags[P.]这代表push+ACK
+当B端发送hello信息时，出现flags[P.]这代表push+ACK  
+
 ![4](./Pasted%20image%2020260802191157.png)
-当B端断开连接时，出现flags[F.]这是FIN+ACK包
-2、seq:三次握手前表示初始的序列号，本包第一个数据字节在字节流中的位置
-3、ack:期望对端下一个字节的序号
-4、length:本次发送的字节数
-5、win:接收窗口大小
-6、mss:协商最大报文段长度
+当B端断开连接时，出现flags[F.]这是FIN+ACK包  
+
+2、seq:三次握手前表示初始的序列号，本包第一个数据字节在字节流中的位置  
+
+3、ack:期望对端下一个字节的序号  
+
+4、length:本次发送的字节数  
+
+5、win:接收窗口大小  
+
+6、mss:协商最大报文段长度  ## task1-4
